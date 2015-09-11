@@ -6,7 +6,7 @@ attempt = String.new
 until attempt == password
 	attempt = String.new
 	password.length.times {attempt += digits.sample.to_s}
-	p attempt
+	puts attempt unless ARGV.include? "--silence-attempt" 
 end
 puts "password: #{password}"
 puts "Time to break: #{Time.now - start}"
