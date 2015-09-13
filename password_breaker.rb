@@ -1,5 +1,5 @@
 password = ARGV.first.to_s
-digits = Array('a'..'z') << Array(0..9) << Array('A'..'Z')
+digits = Array('a'..'z') << Array(0..9) << Array('A'..'Z') << %w(! @ $ % ^ & * - _ = + [ { ] } | \ : ; ' " . > ? / <)
 digits.flatten!
 start = Time.now
 attempt = String.new
