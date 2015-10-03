@@ -1,12 +1,11 @@
-password = ARGV.first.to_s
-digits = Array('a'..'z') << Array(0..9) << Array('A'..'Z') << %w(! @ $ % ^ & * - _ = + [ { ] } | \ : ; ' " . > ? / <)
-digits.flatten!
-start = Time.now
-attempt = String.new
+password, characters, start, attempt = ARGV.first.to_s, Array.new, Time.now, String.new
+raise "Password cannot contain spaces" if password.include? " "
+File.open("characters.txt", ?r) {|file| file.each_char {|char| characters << char} }
+characters.delete ?\n
 until attempt == password
 	attempt = String.new
-	password.length.times {attempt += digits.sample.to_s}
+	password.length.times {attempt += characters.sample}
 	puts attempt unless ARGV.include? "--silence-attempt" 
 end
 puts "password: #{password}"
-puts "Time to break: #{Time.now - start}"
+puts "Time to break: #{Time.now - start} seconds"
